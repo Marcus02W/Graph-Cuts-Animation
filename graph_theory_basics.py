@@ -166,7 +166,8 @@ class ChangeColorAnimation(Scene):
             6: (1, 1, 0),
             7: (3, -1, 0),
             8: (3, 1, 0)}
-        # Create an empty graph with black vertices and edges
+        
+        # Creating the graph
         g = Graph(
             vertices=vertices,
             edges=edges,
@@ -213,3 +214,85 @@ class ChangeColorAnimation(Scene):
         )
 
         self.wait(7)
+
+        self.play(FadeOut(g))
+
+
+        ## components in disconnected graph ##
+
+        vertices = [1, 2, 3, 4, 5, 6, 7, 8]
+        edges = [(1, 2), (1, 3), (1, 4), (2, 3),
+                 (2, 4), (3, 4), (5, 6), (5, 8), (5, 7), (6, 7), (6, 8), (7,8)]
+        
+        graph_pos_layout = {    
+            1: (-3, -1, 0),
+            2: (-3, 1, 0),
+            3: (-1, -1, 0),
+            4: (-1, 1, 0),
+            5: (1, -1, 0),
+            6: (1, 1, 0),
+            7: (3, -1, 0),
+            8: (3, 1, 0)}
+        
+        # Creating the graph
+        g_2_comps = Graph(
+            vertices=vertices,
+            edges=edges,
+            layout=graph_pos_layout, layout_scale=3, labels=False,
+            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+        )
+
+        self.play(Create(g_2_comps), run_time = 2)
+        self.wait(2)
+
+        # same subgraph as before
+        vertices_to_change = [6, 7, 8]
+        edges_to_change = [(6, 7), (6, 8), (7, 8)]
+
+        self.play(
+            *[g_2_comps.vertices[v].animate.set_fill_color(ORANGE) for v in vertices_to_change],
+            *[ApplyMethod(g_2_comps.edges[e].set_color, ORANGE) for e in edges_to_change],
+            run_time=2
+        )
+
+        vertices_to_change_2 = [1, 2]
+        edges_to_change_2 = [(1, 2)]
+
+        self.play(
+            *[g_2_comps.vertices[v].animate.set_fill_color(BLUE) for v in vertices_to_change_2],
+            *[ApplyMethod(g_2_comps.edges[e].set_color, BLUE) for e in edges_to_change_2],
+            run_time=2
+        )
+
+
+        # highlighting the seperated components
+        comp_vertices = [1, 2, 3, 4]
+        comp_edges = [(1, 2), (1, 3), (1, 4), (2, 3),
+                 (2, 4), (3, 4)]
+        
+        comp_vertices_2 = [5, 6, 7, 8]
+        comp_edges_2 = [(5, 6), (5, 8), (5, 7), (6, 7), (6, 8), (7,8)]
+
+        self.play(
+            *[g_2_comps.vertices[v].animate.set_fill_color(PURPLE) for v in comp_vertices],
+            *[ApplyMethod(g_2_comps.edges[e].set_color, PURPLE) for e in comp_edges],
+            run_time=4
+        )
+
+        self.wait(4)
+
+        self.play(
+            *[g_2_comps.vertices[v].animate.set_fill_color(GREEN) for v in comp_vertices_2],
+            *[ApplyMethod(g_2_comps.edges[e].set_color, GREEN) for e in comp_edges_2],
+            run_time=4
+        )
+
+        self.wait(7)
+
+        self.play(FadeOut(g))
+
+
+
+
+        

@@ -1,6 +1,6 @@
 from manim import *
 
-class ChangeColorAnimation(Scene):
+class GraphTheoryScene(Scene):
     def construct(self):
 
         # white background

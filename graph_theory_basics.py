@@ -3,10 +3,6 @@ from manim import *
 class GraphTheoryScene(Scene):
     def construct(self):
 
-        # white background
-        self.camera.background_color = WHITE
-
-
         # === animation 1: nodes & edges === #
 
         # Defining the graph structure
@@ -18,8 +14,8 @@ class GraphTheoryScene(Scene):
             vertices=vertices,
             edges=[],
             layout="circular", layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         # Adding vertices to the graph
@@ -27,14 +23,14 @@ class GraphTheoryScene(Scene):
         self.play(Create(g), run_time=3)
 
         # Creating arrow for vertex
-        arrow_1 = Arrow(
+        arrow_1 = Line(
             start=g.vertices[2].get_center()+(1.1, 2.2, 0),
             end=g.vertices[2].get_center()+(0.1, 0.2, 0),
             color=GOLD,
             stroke_width=10
         )
 
-        text_vertices = Tex("Knoten", color=GRAY)
+        text_vertices = Tex("Knoten", color=GOLD)
         text_vertices.next_to(arrow_1.start, RIGHT, buff=0.2)
 
         self.play(Create(arrow_1))
@@ -47,22 +43,22 @@ class GraphTheoryScene(Scene):
         self.wait(4)
 
         # Adding edges to the graph
-        edge_lines = [Line(g.vertices[e[0]].get_center(), g.vertices[e[1]].get_center(), color=BLACK) for e in edges]
+        edge_lines = [Line(g.vertices[e[0]].get_center(), g.vertices[e[1]].get_center(), color=WHITE) for e in edges]
         g_edges = VGroup(*edge_lines)
         self.play(Create(g_edges), run_time=2)
 
         # Creating arrow for edge
-        arrow_2 = Arrow(
+        arrow_2 = Line(
             start=g.vertices[2].get_center()+(g.vertices[1].get_center()-g.vertices[2].get_center())/2+(2,-2,0),
             end=g.vertices[2].get_center()+(g.vertices[1].get_center()-g.vertices[2].get_center())/2,
             color=GOLD,
             stroke_width=10
         )
 
-        text_edges = Tex("Kante", color=GRAY)
+        text_edges = Tex("Kante", color=GOLD)
         text_edges.next_to(arrow_2.start, RIGHT, buff=0.2)
 
-        text_weight = Tex("0.75", color=GRAY)
+        text_weight = Tex("0.75", color=WHITE)
         text_weight.next_to(g_edges, UP, buff = 0.2)
 
         self.play(Create(arrow_2))
@@ -99,32 +95,32 @@ class GraphTheoryScene(Scene):
             vertices=vertices,
             edges=edges,
             layout="planar", layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         g2 = Graph(
             vertices=vertices,
             edges=edges,
             layout="circular", layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         g3 = Graph(
             vertices=vertices,
             edges=edges,
             layout="spiral", layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         g4 = Graph(
             vertices=vertices,
             edges=edges,
             layout=graph_pos_layout, layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         self.play(ScaleInPlace(g1, 0.6))
@@ -172,8 +168,8 @@ class GraphTheoryScene(Scene):
             vertices=vertices,
             edges=edges,
             layout=graph_pos_layout, layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         
@@ -239,8 +235,8 @@ class GraphTheoryScene(Scene):
             vertices=vertices,
             edges=edges,
             layout=graph_pos_layout, layout_scale=3, labels=False,
-            vertex_config={v: {"fill_color": GRAY, "radius": 0.3} for v in vertices},
-            edge_config={(e[0], e[1]): {"stroke_color": BLACK} for e in edges}
+            vertex_config={v: {"fill_color": BLUE, "radius": 0.3} for v in vertices},
+            edge_config={(e[0], e[1]): {"stroke_color": WHITE} for e in edges}
         )
 
         self.play(Create(g_2_comps), run_time = 2)
@@ -260,8 +256,8 @@ class GraphTheoryScene(Scene):
         edges_to_change_2 = [(1, 2)]
 
         self.play(
-            *[g_2_comps.vertices[v].animate.set_fill_color(BLUE) for v in vertices_to_change_2],
-            *[ApplyMethod(g_2_comps.edges[e].set_color, BLUE) for e in edges_to_change_2],
+            *[g_2_comps.vertices[v].animate.set_fill_color(YELLOW) for v in vertices_to_change_2],
+            *[ApplyMethod(g_2_comps.edges[e].set_color, YELLOW) for e in edges_to_change_2],
             run_time=2
         )
 

@@ -1,6 +1,5 @@
 from manim import *
 import networkx as nx
-import matplotlib.pyplot as plt
 
 # Create a new graph
 G = nx.Graph()

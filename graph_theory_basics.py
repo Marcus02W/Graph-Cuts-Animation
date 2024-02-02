@@ -187,9 +187,23 @@ class GraphTheoryScene(Scene):
         self.play(Write(text_subgraph))
         self.play(g.animate.move_to((0, -1, 0)))
         self.wait(3)
-        text_subgraph2 = Text("G(V^, E^) is subgraph of G(V, E) if: \n\n     - V^ ⊆ V \n     - E^ ⊆ E \n     - for each e in E^ its nodes are in V^", color=WHITE, should_center=True).scale(0.4)
-        text_subgraph2.move_to((0, 1.5, 0))
+        text_subgraph2 = Text("G(V^, E^) is subgraph of G(V, E) if:", color=WHITE).scale(0.4)
+        text_part_2 = Text(" 1)V^ ⊆ V").scale(0.4)
+        text_part_3 = Text("2) E^ ⊆ E").scale(0.4)
+        text_part_4 = Text("3) for each e in E^ its nodes are in V^").scale(0.4)
+        
+        text_subgraph2.move_to((0, 1.8, 0))
+        text_part_2.move_to((0, 1.3, 0))
+        text_part_3.move_to((0, 1.0, 0))
+        text_part_4.move_to((0, 0.7, 0))
+
         self.play(Write(text_subgraph2))
+        self.wait(2)
+        self.play(Write(text_part_2))
+        self.wait(1)
+        self.play(Write(text_part_3))
+        self.wait(1)
+        self.play(Write(text_part_4))
         self.wait(3)
 
         self.play(
@@ -198,24 +212,34 @@ class GraphTheoryScene(Scene):
             run_time=4
         )
 
-        self.wait(3)
-        self.play(FadeOut(text_subgraph, text_subgraph2))
+        self.wait(6)
+        self.play(FadeOut(text_subgraph, text_subgraph2, text_part_2, text_part_3, text_part_4))
 
         # text about connectivity
         text_connectivity = Tex("Connected nodes", color=WHITE)
         text_connectivity.move_to((0, 2.5, 0))
         self.play(Write(text_connectivity))
         self.wait(1)
-        text_connectivity2 = Text("In undirected graphs: Two nodes are connected, if there is a path from one node to the other \n\n => all nodes are connected to one another in our graph => connected graph", color=WHITE, should_center=True).scale(0.4)
-        text_connectivity2.move_to((0, 1.5, 0))
+        text_connectivity2 = Text("In undirected graphs: Two nodes are connected, if there is a path from one node to the other", color=WHITE, should_center=True).scale(0.4)
+        text_connectivity2.move_to((0, 1.8, 0))
+
+        text_connectivity3 = Text("=> all nodes are connected to one another in our graph").scale(0.4)
+        text_connectivity4 = Text("=> connected graph yields exactly one component").scale(0.4)
+        text_connectivity3.move_to((0, 1.3, 0))
+        text_connectivity4.move_to((0, 1.0, 0))
+
         self.play(Write(text_connectivity2))
-        self.wait(3)
-        self.play(FadeOut(text_connectivity, text_connectivity2))
+        self.wait(2)
+        self.play(Write(text_connectivity3))
+        self.wait(1)
+        self.play(Write(text_connectivity4))
+        self.wait(6)
+        self.play(FadeOut(text_connectivity, text_connectivity2, text_connectivity3, text_connectivity4))
 
 
         
 
-        self.wait(5)
+        self.wait(2)
 
 
 
@@ -229,9 +253,15 @@ class GraphTheoryScene(Scene):
         text_components.move_to((0, 2.5, 0))
         self.play(Write(text_components))
         self.wait(1)
-        text_components2 = Text("   - All nodes v ∈ V, which are connected to some v^ ∈ V^ \n   - All edges in E whose nodes are connected to some node v^ ∈ V^", color=WHITE).scale(0.4)
-        text_components2.move_to((0, 1.5, 0))
+        text_components2 = Text("1) All nodes v ∈ V, which are connected to some v^ ∈ V^", color=WHITE).scale(0.4)
+        text_components2.move_to((0, 1.8, 0))
+
+        text_components3 = Text("2) All edges in E whose nodes are connected to some node v^ ∈ V^").scale(0.4)
+        text_components3.move_to((0, 1.4, 0))
+
         self.play(Write(text_components2))
+        self.wait(1)
+        self.play(Write(text_components3))
         self.wait(3)
 
         self.play(
@@ -249,7 +279,7 @@ class GraphTheoryScene(Scene):
         )
 
         self.wait(7)
-        self.play(FadeOut(text_components, text_components2))
+        self.play(FadeOut(text_components, text_components2, text_components3))
         self.play(FadeOut(g))
 
 
@@ -285,9 +315,16 @@ class GraphTheoryScene(Scene):
         text_components.move_to((0, 2.5, 0))
         self.play(Write(text_components))
         self.wait(1)
-        text_components2 = Text("   - All nodes v ∈ V, which are connected to some v^ ∈ V^ \n   - All edges in E whose nodes are connected to some node v^ ∈ V^", color=WHITE).scale(0.4)
-        text_components2.move_to((0, 1.5, 0))
+        text_components2 = Text("1) All nodes v ∈ V, which are connected to some v^ ∈ V^", color=WHITE).scale(0.4)
+        text_components2.move_to((0, 1.8, 0))
+
+        text_components3 = Text("2) All edges in E whose nodes are connected to some node v^ ∈ V^").scale(0.4)
+        text_components3.move_to((0, 1.4, 0))
+
         self.play(Write(text_components2))
+        self.wait(1)
+        self.play(Write(text_components3))
+
         self.wait(1)
 
         self.play(Create(g_2_comps), run_time = 2)
@@ -336,7 +373,7 @@ class GraphTheoryScene(Scene):
         )
 
         self.wait(5)
-        self.play(FadeOut(text_components, text_components2))
+        self.play(FadeOut(text_components, text_components2, text_components3))
         self.play(FadeOut(g_2_comps))
 
 

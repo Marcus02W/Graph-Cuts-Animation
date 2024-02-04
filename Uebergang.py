@@ -50,6 +50,24 @@ for node in G.nodes():
 
 class GraphScene(Scene):
     def construct(self):
+
+        text_intro = Tex("Graph Cuts motivation").scale(1.4)
+        text_intro.move_to((0, 0.5, 0))
+        text_intro2 = Tex("The graph theoretical perspective")
+        text_intro2.move_to((0, -0.5, 0))
+
+        self.play(Write(text_intro))
+        self.play(Write(text_intro2))
+        self.wait(4)
+        self.play(FadeOut(text_intro, text_intro2))
+
+        text_connected = Tex("Subgraphs and components")
+        text_connected2 = Tex("in a connected graph")
+        text_connected.move_to((0, 0.5, 0))
+        text_connected2.move_to((0, -0.5, 0))
+        self.play(Write(text_connected), Write(text_connected2))
+        self.wait(3)
+        self.play(FadeOut(text_connected, text_connected2))
         # Konvertiere die 2D-Koordinaten in 3D-Koordinaten für Manim
         pos_3d = {node: (x, y, 0) for node, (x, y) in pos.items()}
 
@@ -88,7 +106,7 @@ class GraphScene(Scene):
             *[ApplyMethod(m_graph.edges[e].set_color, "#318ab3") for e in m_graph.edges],
             run_time=3
         )
-        self.wait(3)
+        self.wait(2)
 
         self.play(FadeOut(m_graph))
         m_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
@@ -105,7 +123,7 @@ class GraphScene(Scene):
             run_time=3
         )
 
-        self.wait(3)
+        self.wait(2)
 
         self.play(FadeOut(m_graph))
         m_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
@@ -122,7 +140,43 @@ class GraphScene(Scene):
             run_time=3
         )
 
-        self.wait(3)
+        self.wait(2)
 
         self.play(FadeOut(m_graph))
 
+        self.wait(2)
+
+
+        # subgraphs and components of disconnected graph (desired cuts)
+        text_disconnected = Tex("Subgraphs and components")
+        text_disconnected2 = Tex("in a disconnected graph")
+        text_disconnected.move_to((0, 0.5, 0))
+        text_disconnected2.move_to((0, -0.5, 0))
+        self.play(Write(text_disconnected), Write(text_disconnected2))
+        self.wait(3)
+        self.play(FadeOut(text_disconnected, text_disconnected2))
+
+        space_nodes = list(set(G.nodes()) - (set(earth_nodes).union(set(moon_nodes))))
+        blue_edges = [(u, v) for u, v in G.edges() if u in earth_nodes and v in earth_nodes]
+        yellow_edges = [(u, v) for u, v in G.edges() if u in moon_nodes and v in moon_nodes]
+        purple_edges = [(u, v) for u, v in G.edges() if u in space_nodes and v in space_nodes]
+
+        edge_config2 = {
+            edge: {"stroke_color": "#666666"} for edge in G.edges()
+        }
+
+        edge_config2.update({b_edge: {"stroke_color": '#318ab3'} for b_edge in blue_edges})
+        edge_config2.update({y_edge: {"stroke_color": '#bdb900'} for y_edge in yellow_edges})
+        edge_config2.update({p_edge: {"stroke_color": '#68228B'} for p_edge in purple_edges})
+        edge_config2.update({i_edge: {"stroke_color": BLACK} for i_edge in G.edges() if i_edge not in blue_edges and i_edge not in purple_edges and i_edge not in yellow_edges})
+
+        disconnected_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
+                        vertex_config=vertex_config, edge_config=edge_config2)
+        
+        disconnected_graph.move_to(ORIGIN)
+        disconnected_graph.scale(0.7)
+        self.play(FadeIn(disconnected_graph))
+
+        self.wait(9)
+
+        self.play(FadeOut(disconnected_graph))

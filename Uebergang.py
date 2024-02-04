@@ -81,4 +81,48 @@ class GraphScene(Scene):
         # Füge den Graphen zur Szene hinzu
         self.play(Create(m_graph), run_time=5)
 
+        self.wait(5)
+
+        self.play(
+            *[m_graph.vertices[v].animate.set_fill_color("#318ab3") for v in m_graph.vertices],
+            *[ApplyMethod(m_graph.edges[e].set_color, "#318ab3") for e in m_graph.edges],
+            run_time=3
+        )
+        self.wait(3)
+
+        self.play(FadeOut(m_graph))
+        m_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
+                        vertex_config=vertex_config, edge_config=edge_config)
+        m_graph.move_to(ORIGIN)
+        m_graph.scale(0.7)
+        self.play(FadeIn(m_graph))
+
         self.wait(2)
+
+        self.play(
+            *[m_graph.vertices[v].animate.set_fill_color("#bdb900") for v in m_graph.vertices],
+            *[ApplyMethod(m_graph.edges[e].set_color, "#bdb900") for e in m_graph.edges],
+            run_time=3
+        )
+
+        self.wait(3)
+
+        self.play(FadeOut(m_graph))
+        m_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
+                        vertex_config=vertex_config, edge_config=edge_config)
+        m_graph.move_to(ORIGIN)
+        m_graph.scale(0.7)
+        self.play(FadeIn(m_graph))
+
+        self.wait(2)
+
+        self.play(
+            *[m_graph.vertices[v].animate.set_fill_color("#68228B") for v in m_graph.vertices],
+            *[ApplyMethod(m_graph.edges[e].set_color, "#68228B") for e in m_graph.edges],
+            run_time=3
+        )
+
+        self.wait(3)
+
+        self.play(FadeOut(m_graph))
+

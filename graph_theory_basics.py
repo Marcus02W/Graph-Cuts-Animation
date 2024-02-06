@@ -30,7 +30,7 @@ class GraphTheoryScene(Scene):
             stroke_width=10
         )
 
-        text_vertices = Tex("Node", color=GOLD)
+        text_vertices = Tex("Nodes V = \{1, 2\}", color=GOLD)
         text_vertices.next_to(arrow_1.start, RIGHT, buff=0.2)
 
         self.play(Create(arrow_1))
@@ -55,7 +55,7 @@ class GraphTheoryScene(Scene):
             stroke_width=10
         )
 
-        text_edges = Tex("Edge", color=GOLD)
+        text_edges = Tex("Edges E = \{\{1, 2\}\}", color=GOLD)
         text_edges.next_to(arrow_2.start, RIGHT, buff=0.2)
 
         text_weight = Tex("0.75", color=WHITE)

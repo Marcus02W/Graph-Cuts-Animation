@@ -189,6 +189,19 @@ class GraphTheoryScene(Scene):
         self.wait(3)
         text_subgraph2 = Text("G(V^, E^) is subgraph of G(V, E) if:", color=WHITE).scale(0.4)
         text_part_2 = Text(" 1) V^ ⊆ V").scale(0.4)
+        tom_v = ImageMobject("../Bilder/Verwirrt.png")
+        
+        # Skaliere das Bild nach Bedarf
+        tom_v.scale(0.5) # Passt die Größe des Bildes an
+        
+        
+        # Positioniere die Figur außerhalb des sichtbaren Bereichs (rechts unten)
+        
+        tom_v.move_to(DOWN*7+LEFT*5)
+        
+        # Bewege die Figur leicht nach links gedreht ins Bild
+        self.play(tom_v.animate.rotate(0.3))
+
         text_part_3 = Text("2) E^ ⊆ E").scale(0.4)
         text_part_4 = Text("3) for each e in E^ its nodes are in V^").scale(0.4)
         
@@ -201,14 +214,15 @@ class GraphTheoryScene(Scene):
         self.wait(2)
         self.play(Write(text_part_2))
         self.wait(1)
-        self.play(Write(text_part_3))
+        self.play(Write(text_part_3),tom_v.animate.move_to(DOWN*3+LEFT*5))
+        self.play(tom_v.animate.rotate(0.3))
         self.wait(1)
         self.play(Write(text_part_4))
         self.wait(3)
 
         self.play(
             *[g.vertices[v].animate.set_fill_color(ORANGE) for v in vertices_to_change],
-            *[ApplyMethod(g.edges[e].set_color, ORANGE) for e in edges_to_change],
+            *[ApplyMethod(g.edges[e].set_color, ORANGE) for e in edges_to_change],tom_v.animate.move_to(DOWN*7+LEFT*5),
             run_time=4
         )
 

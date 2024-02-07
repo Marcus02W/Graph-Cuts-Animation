@@ -188,7 +188,7 @@ class GraphTheoryScene(Scene):
         self.play(g.animate.move_to((0, -1, 0)))
         self.wait(3)
         text_subgraph2 = Text("G(V^, E^) is subgraph of G(V, E) if:", color=WHITE).scale(0.4)
-        text_part_2 = Text(" 1)V^ ⊆ V").scale(0.4)
+        text_part_2 = Text(" 1) V^ ⊆ V").scale(0.4)
         text_part_3 = Text("2) E^ ⊆ E").scale(0.4)
         text_part_4 = Text("3) for each e in E^ its nodes are in V^").scale(0.4)
         
@@ -223,8 +223,8 @@ class GraphTheoryScene(Scene):
         text_connectivity2 = Text("In undirected graphs: Two nodes are connected, if there is a path from one node to the other", color=WHITE, should_center=True).scale(0.4)
         text_connectivity2.move_to((0, 1.8, 0))
 
-        text_connectivity3 = Text("=> all nodes are connected to one another in our graph").scale(0.4)
-        text_connectivity4 = Text("=> connected graph yields exactly one component").scale(0.4)
+        text_connectivity3 = Text("➡️ all nodes are connected to one another in our graph").scale(0.4)
+        text_connectivity4 = Text("➡️ connected graph yields exactly one component").scale(0.4)
         text_connectivity3.move_to((0, 1.3, 0))
         text_connectivity4.move_to((0, 1.0, 0))
 

@@ -189,7 +189,7 @@ class GraphTheoryScene(Scene):
         self.wait(3)
         text_subgraph2 = Text("G(V^, E^) is subgraph of G(V, E) if:", color=WHITE).scale(0.4)
         text_part_2 = Text(" 1) V^ ⊆ V").scale(0.4)
-        tom_v = ImageMobject("../Bilder/Verwirrt.png")
+        tom_v = ImageMobject("./Bilder/Verwirrt.png")
         
         # Skaliere das Bild nach Bedarf
         tom_v.scale(0.5) # Passt die Größe des Bildes an

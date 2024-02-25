@@ -194,18 +194,14 @@ class GraphTheoryScene(Scene):
         self.wait(3)
         text_subgraph2 = Text("G(V^, E^) is subgraph of G(V, E) if:", color=WHITE).scale(0.4)
         text_part_2 = Text(" 1) V^ ⊆ V").scale(0.4)
+
+        ### Tom animation ###
         tom_v = ImageMobject("./Bilder/Verwirrt.png")
-        
-        # Skaliere das Bild nach Bedarf
-        tom_v.scale(0.5) # Passt die Größe des Bildes an
-        
-        
-        # Positioniere die Figur außerhalb des sichtbaren Bereichs (rechts unten)
-        
+        tom_v.scale(0.5)  
         tom_v.move_to(DOWN*7+LEFT*5)
-        
-        # Bewege die Figur leicht nach links gedreht ins Bild
+        # Rotating animation of tom
         self.play(tom_v.animate.rotate(0.3))
+
 
         text_part_3 = Text("2) E^ ⊆ E").scale(0.4)
         text_part_4 = Text("3) for each e in E^ its nodes are in V^").scale(0.4)

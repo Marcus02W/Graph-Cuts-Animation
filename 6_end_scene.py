@@ -65,7 +65,7 @@ class GraphScene(Scene):
         self.wait(3)
         self.play(FadeOut(text_intro2))
 
-        # KConvertion of 2D coordinates into 3D for manim
+        # Convertion of 2D coordinates into 3D for manim
         pos_3d = {node: (x, y, 0) for node, (x, y) in pos.items()}
 
         # Colour definition

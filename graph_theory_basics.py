@@ -2,7 +2,12 @@ from manim import *
 
 class GraphTheoryScene(Scene):
     def construct(self):
+        text_intro = Tex("Graph Theory").scale(1)
+        text_intro.move_to((0, 0, 0))
 
+        self.play(Write(text_intro))
+        self.wait(3)
+        self.play(FadeOut(text_intro))
         # === animation 1: nodes & edges === #
 
         # Defining the graph structure
@@ -238,7 +243,7 @@ class GraphTheoryScene(Scene):
         text_connectivity2.move_to((0, 1.8, 0))
 
         text_connectivity3 = Text("➡️ all nodes are connected to one another in our graph").scale(0.4)
-        text_connectivity4 = Text("➡️ connected graph yields exactly one component").scale(0.4)
+        text_connectivity4 = Text("➡️ connected graph").scale(0.4)
         text_connectivity3.move_to((0, 1.3, 0))
         text_connectivity4.move_to((0, 1.0, 0))
 

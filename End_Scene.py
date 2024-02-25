@@ -65,15 +65,15 @@ class GraphScene(Scene):
         self.wait(3)
         self.play(FadeOut(text_intro2))
 
-        # Konvertiere die 2D-Koordinaten in 3D-Koordinaten für Manim
+        # KConvertion of 2D coordinates into 3D for manim
         pos_3d = {node: (x, y, 0) for node, (x, y) in pos.items()}
 
-        # Definiere die Farben für jeden Knoten
+        # Colour definition
         node_colors = {node: ('#bdb900' if node in moon_nodes else 
                               '#318ab3' if node in earth_nodes else 
                               '#68228B') for node in G.nodes()}
 
-        # Konfiguration für die Knoten
+        # Node config
         vertex_config = {
             node: {"radius": 0.2, "color": node_colors[node]}
             for node in G.nodes()
@@ -88,25 +88,25 @@ class GraphScene(Scene):
         earth_link_nodes = [(3,4),(4,4),(5,4),(6,4),(6,5)]
         space_link_nodes = [(1,7), (1,8), (2,8), (2,7), (2,6), (2,5), (7,0), (7,1), (7,2), (7,3), (8,3), (8,4), (8,5)]
         
-        # Konfiguration für die Kanten
+        # Edge config
         edge_config = {
             edge: {"stroke_color": "#666666"}
             for edge in G.edges()
         }
 
-        # Erstelle einen Manim-Graphen aus dem networkx-Graphen
+        # first graph without the updated colours of the constraints
         m_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
                         vertex_config=vertex_config, edge_config=edge_config)
 
 
-        # Zentriere den Graphen in der Szene
+        # centering
         m_graph.move_to(ORIGIN)
         m_graph.scale(0.7)
 
-        # Füge den Graphen zur Szene hinzu
         self.play(Create(m_graph), run_time=5)
         self.wait(3)
 
+        # updating colours in config for constraint visualization
         edge_config.update({moon_edge: {"stroke_color": 'orange'} for moon_edge in must_link_moon})
         vertex_config.update({moon_link_node: {"color": 'orange', "radius": 0.2} for moon_link_node in moon_link_nodes})
         edge_config.update({earth_edge: {"stroke_color": 'white'} for earth_edge in must_link_earth})
@@ -114,7 +114,7 @@ class GraphScene(Scene):
         edge_config.update({space_edge: {"stroke_color": '#80091B'} for space_edge in must_link_space})
         vertex_config.update({space_link_node: {"color": '#80091B', "radius": 0.2} for space_link_node in space_link_nodes})
 
-        # Erstelle einen Manim-Graphen aus dem networkx-Graphen
+        # this new graph new represents the constraints with different colours (uses the updated config)
         m_graph2 = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
                         vertex_config=vertex_config, edge_config=edge_config)
         m_graph2.move_to(ORIGIN)

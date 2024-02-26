@@ -68,35 +68,35 @@ class GraphScene(Scene):
         self.play(Write(text_connected), Write(text_connected2))
         self.wait(3)
         self.play(FadeOut(text_connected, text_connected2))
-        # Konvertiere die 2D-Koordinaten in 3D-Koordinaten für Manim
+        # Convertion of 2D coordinates into 3D for manim
         pos_3d = {node: (x, y, 0) for node, (x, y) in pos.items()}
 
-        # Definiere die Farben für jeden Knoten
+        # Colour definition
         node_colors = {node: ('#bdb900' if node in moon_nodes else 
                               '#318ab3' if node in earth_nodes else 
                               '#68228B') for node in G.nodes()}
 
-        # Konfiguration für die Knoten
+        # Node config
         vertex_config = {
             node: {"radius": 0.2, "color": node_colors[node]}
             for node in G.nodes()
         }
         
-        # Konfiguration für die Kanten
+        # Edge config
         edge_config = {
             edge: {"stroke_color": "#666666"}
             for edge in G.edges()
         }
-        # Erstelle einen Manim-Graphen aus dem networkx-Graphen
+        # Manim graph building from networkx graph
         m_graph = Graph(list(G.nodes), list(G.edges), layout=pos_3d, layout_scale=1, labels=False, 
                         vertex_config=vertex_config, edge_config=edge_config)
 
 
-        # Zentriere den Graphen in der Szene
+        # centering
         m_graph.move_to(ORIGIN)
         m_graph.scale(0.7)
 
-        # Füge den Graphen zur Szene hinzu
+        
         self.play(Create(m_graph), run_time=5)
 
         self.wait(5)
